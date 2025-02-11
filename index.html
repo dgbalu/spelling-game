@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Spelling Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="welcome-screen" class="screen active">
+            <h1 class="student-name">HI ATHARVA!</h1>
+            <h2 class="game-title">🌟 Magic Spelling Game 🌟</h2>
+            <p>Let's have fun learning new words!</p>
+            <div class="game-modes">
+                <button onclick="startGame('spelling')" class="game-btn">
+                    🎧 Spelling Practice
+                </button>
+                <button onclick="startGame('scramble')" class="game-btn">
+                    🎲 Unscramble Words
+                </button>
+                <button onclick="startGame('blanks')" class="game-btn">
+                    🎯 Fill in Blanks
+                </button>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div class="score-display">Score: <span id="score">0</span>/<span id="total">0</span></div>
+            <div id="game-content">
+                <h2 id="game-title"></h2>
+                <div id="word-display"></div>
+                <p id="hint"></p>
+                <div id="input-area">
+                    <input type="text" id="user-input" placeholder="Type your answer...">
+                    <button onclick="checkAnswer()" id="submit-btn">Submit</button>
+                    <button onclick="speakWord(currentWord)" id="repeat-btn" class="repeat-btn">
+                        🔊 Hear Again
+                    </button>
+                </div>
+                <p id="message"></p>
+                <div id="timer" class="hidden"></div>
+            </div>
+            <button onclick="showWelcomeScreen()" class="back-btn">← Back to Menu</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
