@@ -1,14 +1,12 @@
 const WORDS = {
-    "pram": "A small carriage for a baby",
-    "latch": "A door ___ keeps it closed",
-    "shed": "A small building for storing tools and equipment",
-    "twin": "One of two siblings born at the same time",
-    "why": "Ask this when you want to know the reason",
-    "flew": "Past tense of fly - the bird ___ away",
-    "drum": "A musical instrument you hit to make sound",
-    "flu": "A common illness that makes you feel sick",
-    "clock": "Tells you the time on the wall",
-    "flex": "To bend or stretch your muscles"
+    "check": "A small carriage for a baby",
+    "where": "A door ___ keeps it closed",
+    "when": "A small building for storing tools and equipment",
+    "sneeze": "One of two siblings born at the same time",
+    "how": "Ask this when you want to know the reason",
+    "same": "Past tense of fly - the bird ___ away",
+    "push": "A musical instrument you hit to make sound",
+    "what": "A common illness that makes you feel sick"
 }; 
 
 let currentWord = '';
