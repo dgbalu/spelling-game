@@ -9,16 +9,76 @@ const worker = Tesseract.createWorker({
     await worker.initialize('eng');
 })();
 
-const WORDS = {
-    "check": "To make sure something is correct",
-    "where": "Ask this to know the place or location",
-    "when": "Ask this to know the time something happens",
-    "sneeze": "What you do when your nose is tickly - achoo!",
-    "how": "Ask this to learn the way to do something",
-    "same": "When two things are exactly alike",
-    "push": "To move something by moving it away from you",
-    "what": "Ask this to know more about something"
-}; 
+const WORD_SETS = {
+    "set1": {
+        name: "Basic Words",
+        words: {
+            "check": "To make sure something is correct",
+            "where": "Ask this to know the place or location",
+            "when": "Ask this to know the time something happens",
+            "sneeze": "What you do when your nose is tickly - achoo!",
+            "how": "Ask this to learn the way to do something",
+            "same": "When two things are exactly alike",
+            "push": "To move something by moving it away from you",
+            "what": "Ask this to know more about something"
+        }
+    },
+    "spelling1": {
+        name: "Spelling 1 (16th April - Wednesday)",
+        words: {
+            "first": "Coming before all others",
+            "second": "Coming after the first and before the third",
+            "third": "Coming after the second and before the fourth",
+            "fifth": "Coming after the fourth and before the sixth",
+            "sixth": "Coming after the fifth and before the seventh",
+            "seventh": "Coming after the sixth and before the eighth",
+            "eighth": "Coming after the seventh and before the ninth",
+            "ninth": "Coming after the eighth"
+        }
+    },
+    "spelling2": {
+        name: "Spelling 2 (30th April - Wednesday)",
+        words: {
+            "before": "At an earlier time than something else",
+            "between": "In the middle of two things or times",
+            "after": "Following in time or later than something",
+            "eleven": "The number 11",
+            "twelve": "The number 12",
+            "thirteen": "The number 13",
+            "fifteen": "The number 15",
+            "eighteen": "The number 18"
+        }
+    },
+    "spelling3": {
+        name: "Spelling 3 (14th May - Wednesday)",
+        words: {
+            "pretty": "Attractive or pleasing to look at",
+            "library": "A place where books are kept",
+            "fact": "Something that is known to be true",
+            "read": "To look at and understand written words",
+            "scared": "Feeling fear or being frightened",
+            "sorry": "Feeling sad or regretful about something",
+            "money": "What we use to buy things",
+            "because": "For the reason that"
+        }
+    },
+    "spelling4": {
+        name: "Spelling 4 (28th May - Wednesday)",
+        words: {
+            "stamp": "A small piece of paper you stick on a letter to mail it",
+            "barn": "A building on a farm for animals or storing things",
+            "lunch": "The meal eaten in the middle of the day",
+            "dinner": "The main meal of the day, usually eaten in the evening",
+            "guard": "To protect or watch over someone or something",
+            "tooth": "One of the hard white objects in your mouth",
+            "respect": "To admire someone because they are good or important",
+            "care": "To look after someone or something"
+        }
+    }
+};
+
+let currentWordSet = "set1";
+let WORDS = WORD_SETS[currentWordSet].words;
 
 let currentWord = '';
 let currentGameMode = '';
@@ -177,6 +237,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('user-input').addEventListener('input', function() {
         clearTimeout(repeatTimer);  // Stop repeat timer when user starts typing
     });
+    
+    // Generate word set buttons
+    generateWordSetButtons();
 });
 
 function startDrawing(e) {
@@ -400,4 +463,42 @@ function setupGame(mode) {
     document.getElementById('user-input').value = '';
     document.getElementById('message').textContent = '';
     attempts = 0;  // Reset attempts for new word
+}
+
+// Function to generate word set buttons
+function generateWordSetButtons() {
+    const wordSetContainer = document.createElement('div');
+    wordSetContainer.className = 'word-sets';
+    wordSetContainer.innerHTML = '<h3>Choose a Word Set:</h3>';
+    
+    for (const setKey in WORD_SETS) {
+        const button = document.createElement('button');
+        button.className = 'word-set-btn';
+        button.textContent = WORD_SETS[setKey].name;
+        button.onclick = function() {
+            selectWordSet(setKey);
+        };
+        wordSetContainer.appendChild(button);
+    }
+    
+    // Insert before game modes
+    const gameModes = document.querySelector('.game-modes');
+    gameModes.parentNode.insertBefore(wordSetContainer, gameModes);
+}
+
+// Function to select word set
+function selectWordSet(setKey) {
+    currentWordSet = setKey;
+    WORDS = WORD_SETS[setKey].words;
+    currentWordIndex = 0;
+    
+    // Update UI to show selected set
+    const buttons = document.querySelectorAll('.word-set-btn');
+    buttons.forEach(btn => {
+        if (btn.textContent === WORD_SETS[setKey].name) {
+            btn.classList.add('selected');
+        } else {
+            btn.classList.remove('selected');
+        }
+    });
 }

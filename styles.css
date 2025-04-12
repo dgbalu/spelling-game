@@ -243,4 +243,32 @@ h1:not(.student-name) {
     #user-input, #submit-btn {
         display: none;
     }
+}
+
+.word-sets {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.word-set-btn {
+    background-color: #f8f9fa;
+    border: 2px solid #6c757d;
+    border-radius: 8px;
+    color: #343a40;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    margin: 5px;
+    padding: 8px 16px;
+    transition: all 0.3s;
+}
+
+.word-set-btn:hover {
+    background-color: #e9ecef;
+}
+
+.word-set-btn.selected {
+    background-color: #28a745;
+    border-color: #1e7e34;
+    color: white;
 } 
